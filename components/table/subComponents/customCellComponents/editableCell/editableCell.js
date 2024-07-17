@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from
 import { ThemeContext } from '../../contexts/ThemeContext';
 import EditableCellInput from './childs/editableCellInput';
 import { EditCellButton } from './childs/editCellButton';
-import { cellTrimmer } from './cellTrimmer';
+import { cellTrimmer } from '../cellTrimmer';
 import globalStyles from '../../../styles/globalStyles';
 
 const width = Dimensions.get('window').width;
