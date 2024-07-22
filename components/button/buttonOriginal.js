@@ -16,11 +16,10 @@ const ButtonOriginal = ({ children, title, onPress, buttonStyle, textStyle }) =>
       style={[styles.button, buttonStyle]}
       onPress={onPress}
     >
-       {children ? (
-        // If Button has children, display them
+      {/* Conditionally render Children component or Text component */}
+      {children ? (
         children
       ) : (
-        // Otherwise, display a Text component with the specified title
         <Text style={[styles.buttonText, textStyle]}>
           {title}
         </Text>
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 0,
     backgroundColor: color.white,
-    shadowColor: "#000000",
+    shadowColor: color.black,
     shadowOffset: {
         width: 0,
         height: 0,

@@ -1,138 +1,131 @@
-import { View, Text, FlatList, Dimensions, StyleSheet, Alert, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, FlatList, Dimensions, StyleSheet, Alert, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import RowFlatlist from './subComponents/rowFlatlist'
-import FullScreenLoading from '../loading/FullScreenLoading'
 import { TableHeaderComponent } from './subComponents/TableHeaderComponent'
 import { handleTransformCard } from './functions/handleTransformCard'
 import { handleTransformTable } from './functions/handleTransformTable'
+import globalStyles from '../../styles/globalStyles'
+import Loading from '../loading/loading'
+import ButtonOriginal from '../button/buttonOriginal'
 
 const { width } = Dimensions.get('window');
 
-const  TableComponent = (props) => {
-  const tableData = props.data
-  const handleLoadMore = props.handleLoadMore
-  const [deleteIndex,setDeleteIndex] = useState(-1)
-  const [selectedIndex,setSelectedIndex] = useState(-2)
-  const[colCount,setColCount] = useState(0)
-  // Header Style için buna sonra bakılacak.
-  const [tableAllData, setTableAllData] = useState([])
+const TableComponent = (props) => {
+  const { data: tableData, isLoadingTable } = props;
+  const [deleteIndex, setDeleteIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(-2);
+  const [tableAllData, setTableAllData] = useState([]);
 
-  const renderItemPC = ({ item, index }) => (
+  useEffect(() => {
+    const transformedData = width >= 500 ? handleTransformTable(tableData) : handleTransformCard(tableData);
+    setTableAllData(transformedData);
+  }, [tableData]);
+
+  const handleCellFunction = async (cellItem) => {
+    try {
+      await cellItem.onPress();
+    } catch (e) {
+      Alert.alert("Veri silinemedi.");
+    } finally {
+      setDeleteIndex(-1);
+      setSelectedIndex(-2);
+    }
+  };
+
+  const handleDeleteFunction = (cellItem, innerIndex) => {
+    if (cellItem.onPress) {
+      setSelectedIndex(innerIndex);
+      setDeleteIndex(innerIndex);
+      handleCellFunction(cellItem);
+    }
+  };
+  // Render Items for Flatlists
+  const renderItemLarge = ({ item, index }) => (
     <RowFlatlist 
-      key={index} 
+      key={`${item.id}_${index}`}
       data={item} 
       rowIndex={index} 
       deleteIndex={deleteIndex}
       setDeleteIndex={setDeleteIndex}
-      isDrawerSmall={props.isDrawerSmall} 
-      colCount={colCount}
     />
-  )
-  let containerWidth = width-80
+  );
 
-  const renderItemPhone = ({ item, index }) => {
-    // Combine two arrays
-    const keys = Object.keys(item)
-    const values = Object.values(item)
-    // let cellItem = value.props
-    async function handleCellFunction (cellItem) {
-      try{
-        await cellItem.onPress()
-      } catch(e){
-        Alert.alert("Veri silinemedi.")
-      } finally {
-        setDeleteIndex(-1) 
-        setSelectedIndex(-2)
-      }
-    }
-    function handleDeleteFunction(innerIndex) {
-      if(values[innerIndex].props.onPress) {
-        setSelectedIndex(index)
-        setDeleteIndex(innerIndex) 
-        console.log("xd",values[innerIndex].props)
-        handleCellFunction(values[innerIndex].props)
-      }
-    }
-  return (
-      <View 
-        key={index} 
-        style={[
-          globalStyles(width).shadowDrawerStyle,{borderWidth:0.5,
-          width:containerWidth,marginVertical:6,paddingHorizontal:10 }
-        ]}
-      >
-        {keys.map((key,innerIndex) =>  {
-          return(
-            index === selectedIndex) ? 
-            <FullScreenLoading kind="cell" message="Veri siliniyor..."/> :
-            <View key={innerIndex} style={{flexDirection:"row"}}>
-                <Text style={[styles.textKey,{width:containerWidth/2}]}>{key}:</Text>
-                <TouchableOpacity  onPress={() => handleDeleteFunction(innerIndex)}>
-                  <Text 
-                    style={{ width:"100%", justifyContent: "center", alignItems: "center", textAlign: "center", padding: 8 }}
-                  >
-                    {values[innerIndex]}
-                  </Text>
-                </TouchableOpacity>
-            </View> 
-          }
-        )}
+  const renderItemSmall = ({ item, index }) => {
+    const keys = Object.keys(item);
+    const values = Object.values(item);
+
+    return (
+      <View style={styles.renderItemPhone}>
+        {keys.map((key, innerIndex) => (
+          index === selectedIndex ? (
+            <Loading key={innerIndex} message="Veri siliniyor..." />
+          ) : (
+            <View key={innerIndex} style={{ flexDirection: "row" }}>
+              <Text style={styles.textKey}>{key}:</Text>
+              <ButtonOriginal 
+                onPress={() => handleDeleteFunction(values[innerIndex].props, innerIndex)} 
+                title={values[innerIndex]} 
+              />
+            </View>
+          )
+        ))}
       </View>
-    )
-  }
-  
-  let cardViewStyle = { flex: 1, flexDirection: "row", paddingVertical: 10 }
-  // UseEffect
-  function handleTableData() {
-    let transformedData = width>=500 ? handleTransformTable(tableData) : handleTransformCard(tableData)
-    setTableAllData(transformedData)
-  }
+    );
+  };
 
-  useEffect(() => {
-    handleTableData()
-    setColCount(Object.keys(tableData.data).length)
-     return () => setColCount(0)
-  }, [tableData])
+  // Render for large screens - Tablets && PCs
+  const renderLargeScreen = () => (
+    <ScrollView horizontal style={{ flex: 1, flexDirection: "row" }}>
+      <FlatList
+        data={tableAllData}
+        renderItem={renderItemLarge}
+        style={styles.tableViewStyle}
+        ListHeaderComponent={<TableHeaderComponent data={tableData} />}
+        ListFooterComponent={isLoadingTable && <Loading message="Tablo Yükleniyor, lütfen bekleyin..." />}
+      />
+    </ScrollView>
+  );
 
-  return width>=500 ? (
-      <ScrollView horizontal style={{ flex: 1, flexDirection: "row", width: "100%" }}>
-        <FlatList
-          style={[
-            styles.tableViewStyle,{margin: props.kind==="Reading" ? 10 : 0}
-          ]}
-          ListHeaderComponent={<TableHeaderComponent data={tableData} colCount={colCount} />}
-          ListFooterComponent={props.isLoadingTable ?
-          <FullScreenLoading message="Tablo Yükleniyor, lütfen bekleyin..."/> :
-          null
-          }
-          contentContainerStyle={{flex:1}}
-          data={tableAllData}
-          renderItem={renderItemPC}
-          onEndReached={ props.kind==="Reading" ? () => handleLoadMore() : null}
-          onEndReachedThreshold={0.1}
-          />    
-      </ScrollView> 
-      ): (
-      <View style={cardViewStyle}>
-        <FlatList
-          data={tableAllData}
-          renderItem={renderItemPhone}
-        />
-      </View>
-      )
-}
+  // Render for small screens - Phones
+  const renderSmallScreen = () => (
+    <View style={styles.cardViewStyle}>
+      <FlatList
+        style={{ flexDirection: row }}
+        data={tableAllData}
+        renderItem={renderItemSmall}
+      />
+    </View>
+  );
+
+  return width >= 500 ? renderLargeScreen() : renderSmallScreen();
+};
+
 const styles = StyleSheet.create({
   textKey: {
+    flex: 1,
     marginVertical: "auto",
     fontWeight: "bold",
     fontSize: 12,
     textAlign: "left",
     padding: 8,
   },
+  renderItemPhone: {
+    borderWidth: 0.5,
+    flex: 1,
+    ...globalStyles(width).mediumShadowStyle,
+    borderRadius: 30,
+    marginVertical: 6,
+    paddingHorizontal: 10 
+  },
+  cardViewStyle: { 
+    flex: 1, 
+    flexDirection: "row", 
+    paddingVertical: 10 
+  },
   tableViewStyle: {
-    marginVertical: 5,
-    width: "100%",
-    ...globalStyles(width).shadowDrawerStyle,
+    margin: 0,
+    flex: 1,
+    ...globalStyles(width).mediumShadowStyle,
     borderRadius: 20,
   }
 })

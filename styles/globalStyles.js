@@ -14,8 +14,16 @@ const globalStyles = (width) => {
     const cellWidthValue = getCellWidth();
 
     return {
+        getCellWidth,
         cellOutView: {
             justifyContent: "center",
+        },
+        mediumShadowStyle: {
+            shadowColor: 'rgba(0, 0, 0, 0.25)',
+            shadowOffset: { width: 0, height: 1 },
+            shadowOpacity: 1,
+            shadowRadius: 3,
+            elevation: 3, // Android için shadow
         },
         cellView: {
             flex: 1,

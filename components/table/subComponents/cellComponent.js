@@ -1,82 +1,79 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Text, View, StyleSheet,Dimensions,TouchableOpacity, Alert } from 'react-native';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import CustomLoading from '../customComponents/customLoading';
+import React from 'react';
+import { Text, View, StyleSheet, Dimensions, Alert } from 'react-native';
+import { color } from '../../../styles/color';
+import globalStyles from '../../../styles/globalStyles';
+import ButtonOriginal from '../../button/buttonOriginal';
+import Loading from '../../loading/loading';
 
-const width = Dimensions.get("window").width
+const width = Dimensions.get("window").width;
 
 const CellComponent = (props) => {
-  const color = useContext(ThemeContext)
-  let cellClasses = "";
-  if (props.rowIndex % 2 === 0) {
-    cellClasses = styles.odd;
+  // Determine if the row index is even or odd to apply different styling
+  const isEvenRow = props.rowIndex % 2 === 0;
+  const cellClasses = isEvenRow ? styles.even : styles.odd;
 
-  } else {
-    cellClasses = styles.even;
-  }
- 
-  async function handleCellFunction () {
-    const cellItem = props.item.props
-    try{
-      await cellItem.onPress()
-    } catch(e){
-      Alert.alert("Veri silinemedi.")
+  const handleCellFunction = async () => {
+    const cellItem = props.item.props;
+    try {
+      await cellItem.onPress();
+    } catch (e) {
+      Alert.alert("Veri silinemedi.");
     } finally {
-      props.setDeleteIndex(-1) 
+      props.setDeleteIndex(-1);
     }
-  }
-  async function handleDeleteFunction() {
-    const condition = props.item.type.name === "DeleteButton" ? true : false
-    // console.log("cond:",condition)
-    if(condition) {
-      props.setDeleteIndex(props.rowIndex) 
-      handleCellFunction()
-    } 
-  }
-  // Width belirleme fonksiyonu En dıştaki View'de
-  const maxColCount = width>=1000 ? 6 : 4
-  const loadingStyle = {
-    viewWidth:globalStyles(width).cellInputWidth.width+10,
-    indicatorSize:width>=768 ? 40 : 20,
-    messageFontSize:width>=768 ? 16 : 14
-  }
+  };
+
+  const handleDeleteFunction = () => {
+    const isDeleteButton = props.item.type.name === "DeleteButton";
+    if (isDeleteButton) {
+      props.setDeleteIndex(props.rowIndex);
+      handleCellFunction();
+    }
+  };
+
   return (
-    <View style={[styles.container,cellClasses,
-      {height:props.style==="singleDevice" || props.style==="modalCell" ? 50 : 85, width:props.colCount>=maxColCount ? "auto" : (width-305)/props.colCount}]}
-      >
-      <TouchableOpacity onPress={handleDeleteFunction}>
-      {(props.deleteIndex === props.rowIndex) ? 
-        <CustomLoading style={loadingStyle} message="Veri siliniyor..."/> :
-        <Text style={[styles.buttonTextFilter, props.style==="modalCell" && globalStyles(width).centeredMidText ]}>
-          {props.item}
-        </Text>
-      }
-      </TouchableOpacity>
+    <View style={[styles.container, cellClasses]}>
+      {/* ButtonOriginal component handling delete action */}
+      <ButtonOriginal onPress={handleDeleteFunction}>
+        {/* Conditionally render Loading component or Text component */}
+        {props.deleteIndex === props.rowIndex ? (
+          <Loading
+            containerStyle={globalStyles(width).getCellWidth + 10}
+            message="Veri siliniyor..."
+            loadingSize={width >= 768 ? 40 : 20}
+            textStyle={{ fontSize: width >= 768 ? 15 : 12 }}
+          />
+        ) : (
+          <Text style={styles.buttonTextFilter}>{props.item} </Text>
+        )}
+      </ButtonOriginal>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    margin:0,
-    padding:0,
-    justifyContent:"center",
+    margin: 0,
+    padding: 0,
+    height: 50,
+    justifyContent: "center",
   },
   even: {
-    backgroundColor: '#eee'
+    backgroundColor: color.white,
   },
   odd: {
-    backgroundColor: '#fff'
+    backgroundColor: color.odd,
   },
   buttonTextFilter: {
-    fontSize:width>=500 ? 14 : 12,
-    fontWeight:"550",
+    fontSize: width >= 500 ? 15 : 12,
+    fontWeight: "550",
     textAlign: "center",
-    justifyContent:"center",
+    justifyContent: "center",
     alignItems: "center",
-    padding:5,
+    padding: 5,
   },
 });
 
 export default CellComponent;
+
 

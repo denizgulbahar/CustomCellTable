@@ -17,7 +17,7 @@ async function formatDevice(inputData, updateFunction, deleteFunction) {
       for(let key in outputData.data) {
         let transformedItem = objectTransformer(item[key])
        if(key === "accessInfo") {
-          // Buradaki componentin, normal editableCell'den tek farkı, üstüne tıklandığında aşaı doğru scroll edecek.
+          // Buradaki componentin, normal editableCell'den tek farkı, üstüne tıklandığında aşağı doğru scroll edecek.
           let previousScrollCells = outputData.data["accessInfo"]["cells"];
           const editableScrollCell = (
             <EditableCell
@@ -61,7 +61,7 @@ async function formatDevice(inputData, updateFunction, deleteFunction) {
           const editableCell = (
             <EditableCell 
               data={item} 
-              horizontal={true} 
+              horizontal
               item={transformedItem} 
               keyName={key} 
               updateFunction={updateFunction} 

@@ -1,22 +1,22 @@
 import React from "react"
-import HeaderCell from "../cellComponents/headerCell"
-import { FlatList,Dimensions } from "react-native"
+import { FlatList } from "react-native"
+import TextCell from "../subComponents/cellComponents/textCell"
 
-export const TableHeaderComponent = (({ data, colCount }) => {
+export const TableHeaderComponent = (({ data }) => {
     let tempData = data.headings
     let headerData = [...tempData]
-    // console.log("head:",headerData)
-    const HeaderItem = ({ item, index }) => (
-      <HeaderCell kind="header" item={item} colCount={colCount}/>
+    const HeaderItem = ({ item }) => (
+      <TextCell item={item} />
     )
 
     return (
-        <FlatList
-          horizontal
-          style={{ flex: 1 }}
-          contentContainerStyle={{ flex: 1 }}
-          data={headerData}
-          renderItem={HeaderItem}
-        />
+      <FlatList
+        horizontal
+        data={headerData}
+        keyExtractor={(item, index) => `${item}_${index}`}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flex: 1 }}
+        renderItem={HeaderItem}
+      />
     );
 })

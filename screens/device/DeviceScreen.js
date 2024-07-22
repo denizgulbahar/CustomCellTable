@@ -5,7 +5,7 @@ import JSONData from '../../components/table/tableFormat.json';
 import listDevicePermissionLevels from '../../../API/Device/list-devices'
 import updateDeviceData from '../../../API/Device/update-device'
 import deleteDeviceData from '../../../API/Device/delete-device'
-import FullScreenLoading from '../../components/loading/loading';
+import Loading from '../../components/loading/loading';
 import formatDevice from './formatDevice';
 import { useFocusEffect } from '@react-navigation/native';
 import { ScreenWrapper } from '../../components/wrapper/screenWrapper';
@@ -66,13 +66,17 @@ const DeviceScreen = () => {
     }, [])
   );
   
-  return isLoadingTable ? (
-    <FullScreenLoading message="Tablo Yükleniyor, lütfen bekleyiniz..." /> 
-  ) : (
+  return (
     <ScreenWrapper>
+    {isLoadingTable ? (
+      <Loading message="Tablo Yükleniyor, lütfen bekleyiniz..." />
+    ) : (
+      <>
         <Text style={styles.title}>Device Screen</Text>
         <TableComponent data={tableData} />
-    </ScreenWrapper>
+      </>
+    )}
+  </ScreenWrapper>
   )
 }
 
