@@ -1,0 +1,17 @@
+# Node.js projeleri için
+node_modules/
+npm-debug.log
+
+# React Native projeleri için
+ios/
+android/
+.expo/
+.expo-shared/
+
+# Çeşitli IDE'ler ve editörler için
+.vscode/
+.idea/
+
+# İşletim sistemi dosyaları
+.DS_Store
+Thumbs.db
