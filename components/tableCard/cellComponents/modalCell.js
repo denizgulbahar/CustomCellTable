@@ -1,17 +1,11 @@
 import { FlatList, View, ScrollView, Dimensions } from "react-native";
-import { useEffect } from "react";
-import { cellTrimmer } from "./cellTrimmer";
 import globalStyles from "../../../styles/globalStyles";
-import CustomModal from "../../../modal/customModal";
+import CustomModal from "../../../components/modal/customModal";
 
 const { width } = Dimensions.get("window")
 
 const ModalCell = ({ item }) => {
       const generalStyles = globalStyles(width)
-
-      useEffect(() => {
-        cellTrimmer({maxLength, item, setText})
-      },[item])
      // ModalData, gelen dataya göre dönüştürülecek.
       return(
         <View style={generalStyles.cellOutView}>

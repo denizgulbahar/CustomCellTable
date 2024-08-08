@@ -4,8 +4,8 @@ import ButtonOriginal from "../../components/button/buttonOriginal";
 import { color } from "../../styles/color";
 import { Ionicons } from "@expo/vector-icons";
 import SwitchOriginal from "../../components/switch/switchOriginal";
-import ModalCell from "../../utilities/formatMethods/cellComponents/modalCell";
-import EditableCell from "../../utilities/formatMethods/cellComponents/editableCell";
+import ModalCell from "../../components/tableCard/cellComponents/modalCell";
+import EditableCell from "../../components/tableCard/cellComponents/editableCell/editableCell";
 
 async function formatDevice(inputData, updateFunction, deleteFunction) {
     // İşlem sırası düzeltilince yapılacak.

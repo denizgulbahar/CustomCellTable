@@ -16,6 +16,7 @@ const globalStyles = (width) => {
     return {
         getCellWidth,
         cellOutView: {
+            flex: 1,
             justifyContent: "center",
         },
         mediumShadowStyle: {
@@ -31,12 +32,9 @@ const globalStyles = (width) => {
             marginVertical: "auto",
         },
         cellComponent: {
-            flex: 1,
-            color: color.black,
-            fontSize: width > 500 ? 15 : 12,
             textAlign: "center",
-            fontWeight: "400",
-            padding: 7,
+            fontSize: width > 500 ? 15 : 12,
+            color: color.black,
         },
         editableCellButton: {
             flex: 1,
@@ -48,7 +46,8 @@ const globalStyles = (width) => {
             alignItems: "flex-start",
         },
         cellInputWidth: {
-            width: cellWidthValue,
+            width: 100,
+            backgroundColor:"orange"
         },
     };
 };

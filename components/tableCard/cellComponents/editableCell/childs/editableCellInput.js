@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
-import { color } from "../../../../../../styles/color";
-import InputOriginal from "../../../../../input/inputOriginal";
-import Loading from "../../../../../loading/loading";
+import { StyleSheet, View } from "react-native";
+import { color } from "../../../../../styles/color";
+import InputOriginal from "../../../../input/inputOriginal";
+import Loading from "../../../../loading/loading";
 
 const EditableCellInput = ({ onChange, value, isLoading }) => {
   
@@ -15,7 +15,7 @@ const EditableCellInput = ({ onChange, value, isLoading }) => {
           value={value}
           onChangeText={onChange}
           multiline
-          inputStyle={styles.inputComponent}
+          viewStyle={styles.inputComponent}
         />
       )}
     </View>
@@ -24,11 +24,12 @@ const EditableCellInput = ({ onChange, value, isLoading }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 60,
     height: 40,
     alignSelf: "center",
   },
   inputComponent: {
+    flex: 1,
+    flexDirection: "row",
     borderWidth: 1,
     borderRadius: 5,
     borderColor: color.grey,

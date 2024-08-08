@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, ScrollView, Dimensions } from "react-native";
-import globalStyles from "../../../../styles/globalStyles";
+import globalStyles from "../../../styles/globalStyles";
 import { cellTrimmer } from "./cellTrimmer";
 
 const TextCell = ({ item }) => {

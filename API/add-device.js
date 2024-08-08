@@ -1,5 +1,4 @@
-import Cookies from "js-cookie";
-import constants from "../../resources/constants";
+import constants from "../resources/constants";
 async function createDevice(data) {
     const response = await fetch(`${constants.API_URL_USER}/create-device`, {
         method: 'POST',
@@ -12,7 +11,6 @@ const createDeviceData = async (informations,setIsLoadingCreate) => {
     console.log("Before setIsLoadingCreate(true)")
     // Data ve dataRaw keyleri değişebilir.
     setIsLoadingCreate(true);
-    const clientToken = Cookies.get('clientToken');
     const createData = {
             ...informations,
             createdAt: {
@@ -27,7 +25,6 @@ const createDeviceData = async (informations,setIsLoadingCreate) => {
             }
     };
     const dataRaw = {
-        token: clientToken,
         newDevice: createData
     };
    

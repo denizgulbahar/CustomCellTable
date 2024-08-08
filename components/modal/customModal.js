@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.white,
     borderRadius: 8,
-    margin: width>=500 ? 10 : 5,
+    margin: width >= 500 ? 10 : 5,
   },
   closeButton: {
     alignSelf: 'flex-end',

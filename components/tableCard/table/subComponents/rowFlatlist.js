@@ -1,8 +1,9 @@
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import CellComponent from './cellComponent';
 
 const RowFlatlist = ({ 
   data, 
+  columnWidths,
   deleteIndex, 
   setDeleteIndex, 
   listFunction, 
@@ -11,13 +12,14 @@ const RowFlatlist = ({
   rowIndex 
 }) => {
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, index }) => (
     <CellComponent
-      deleteIndex={deleteIndex}
-      setDeleteIndex={setDeleteIndex}
       item={item} 
+      width={columnWidths[index]}
       rowIndex={rowIndex} 
       style={style}
+      deleteIndex={deleteIndex}
+      setDeleteIndex={setDeleteIndex}
       listFunction={listFunction} 
       updateFunction={updateFunction}
     />
@@ -26,13 +28,19 @@ const RowFlatlist = ({
   return (
     <FlatList
       horizontal
+      scrollEnabled={false}
       keyExtractor={(item, index) => `${item}_${index}`}
-      style={{ flex: 1 }}
-      contentContainerStyle={{ flex: 1 }}
+      contentContainerStyle={styles.container}
       data={data}
       renderItem={renderItem}
     />
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    width: '100%', 
+    alignItems: 'center',
+  }
+})
 export default RowFlatlist;

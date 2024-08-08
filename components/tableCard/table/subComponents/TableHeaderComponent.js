@@ -1,6 +1,6 @@
 import React from "react"
 import { FlatList } from "react-native"
-import TextCell from "../subComponents/cellComponents/textCell"
+import TextCell from "../../cellComponents/textCell"
 
 export const TableHeaderComponent = (({ data }) => {
     let tempData = data.headings

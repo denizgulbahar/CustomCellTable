@@ -1,21 +1,32 @@
-import { View, Text, FlatList, Dimensions, StyleSheet, Alert, ScrollView } from 'react-native'
+import { View, Text, FlatList, Dimensions, StyleSheet, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import RowFlatlist from './subComponents/rowFlatlist'
-import { TableHeaderComponent } from './subComponents/TableHeaderComponent'
-import { handleTransformCard } from './functions/handleTransformCard'
-import { handleTransformTable } from './functions/handleTransformTable'
+import RowFlatlist from './table/subComponents/rowFlatlist'
+import { TableHeaderComponent } from './table/subComponents/TableHeaderComponent'
+import { handleTransformCard } from './card/handleTransformCard'
+import { handleTransformTable } from './table/handleTransformTable'
 import globalStyles from '../../styles/globalStyles'
 import Loading from '../loading/loading'
 import ButtonOriginal from '../button/buttonOriginal'
+import { calculateMaxWidths } from '../../utilities/tableCard/calculateMaxWidths'
+import { dataSource } from '../../data/dataSource'
 
 const { width } = Dimensions.get('window');
 
-const TableComponent = (props) => {
+const ResponsiveTableCard = (props) => {
   const { data: tableData, isLoadingTable } = props;
   const [deleteIndex, setDeleteIndex] = useState(-1);
   const [selectedIndex, setSelectedIndex] = useState(-2);
   const [tableAllData, setTableAllData] = useState([]);
+  
+  // Calculate Max Column Width Properties
+  // Burada, datasource çiftkatlı array yapılıp fonksiyonda props.array yerine geçecek.
+  const [columnWidths, setColumnWidths] = useState([]);
+  useEffect(() => {
+    const widths = calculateMaxWidths(dataSource);
+    setColumnWidths(widths);
+  }, [tableData]);
 
+  // Data Transformation Depend on Screen Size
   useEffect(() => {
     const transformedData = width >= 500 ? handleTransformTable(tableData) : handleTransformCard(tableData);
     setTableAllData(transformedData);
@@ -44,6 +55,7 @@ const TableComponent = (props) => {
     <RowFlatlist 
       key={`${item.id}_${index}`}
       data={item} 
+      columnWidths={columnWidths} 
       rowIndex={index} 
       deleteIndex={deleteIndex}
       setDeleteIndex={setDeleteIndex}
@@ -75,22 +87,20 @@ const TableComponent = (props) => {
 
   // Render for large screens - Tablets && PCs
   const renderLargeScreen = () => (
-    <ScrollView horizontal style={{ flex: 1, flexDirection: "row" }}>
-      <FlatList
-        data={tableAllData}
-        renderItem={renderItemLarge}
-        style={styles.tableViewStyle}
-        ListHeaderComponent={<TableHeaderComponent data={tableData} />}
-        ListFooterComponent={isLoadingTable && <Loading message="Tablo Yükleniyor, lütfen bekleyin..." />}
-      />
-    </ScrollView>
+    <FlatList
+      data={tableAllData}
+      renderItem={renderItemLarge}
+      contentContainerStyle={styles.tableViewStyle}
+      ListHeaderComponent={<TableHeaderComponent data={tableData} />}
+      ListFooterComponent={isLoadingTable && <Loading message="Tablo Yükleniyor, lütfen bekleyin..." />}
+    />
   );
 
   // Render for small screens - Phones
   const renderSmallScreen = () => (
     <View style={styles.cardViewStyle}>
       <FlatList
-        style={{ flexDirection: row }}
+        style={{ flexDirection: "row" }}
         data={tableAllData}
         renderItem={renderItemSmall}
       />
@@ -124,9 +134,11 @@ const styles = StyleSheet.create({
   },
   tableViewStyle: {
     margin: 0,
-    flex: 1,
+    flexGrow: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     ...globalStyles(width).mediumShadowStyle,
-    borderRadius: 20,
   }
 })
-export default TableComponent;
+export default ResponsiveTableCard;

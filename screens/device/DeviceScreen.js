@@ -1,14 +1,16 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import React,{ useState, useCallback } from 'react'
-import TableComponent from "../../components/table/index";
-import JSONData from '../../components/table/tableFormat.json';
-import listDevicePermissionLevels from '../../../API/Device/list-devices'
-import updateDeviceData from '../../../API/Device/update-device'
-import deleteDeviceData from '../../../API/Device/delete-device'
+import ResponsiveTableCard from "../../components/tableCard/index";
+import JSONData from '../../components/tableCard/tableCardFormat.json';
+import listDevicePermissionLevels from '../../API/list-devices';
+import updateDeviceData from '../../API/update-device'
+import deleteDeviceData from '../../API/delete-device'
 import Loading from '../../components/loading/loading';
 import formatDevice from './formatDevice';
 import { useFocusEffect } from '@react-navigation/native';
 import { ScreenWrapper } from '../../components/wrapper/screenWrapper';
+import formatDeviceMock from './formatDeviceMock';
+import { dataSource } from '../../data/dataSource';
 
 const { width } = Dimensions.get('window')
 
@@ -22,8 +24,8 @@ const DeviceScreen = () => {
     // formatData kısmı - tableda formatlanacak data, 
     // getInputsData kısmı - de cihaz ekleme ve filtrelemede kullanılacak inputların datası
     try {
-      const data = await listDevicePermissionLevels();
-      formatData(data)
+      // const data = await listDevicePermissionLevels();
+      formatData(dataSource)
 
     } catch (error) {
       console.error('Error handling table data:', error);
@@ -52,7 +54,7 @@ const DeviceScreen = () => {
     // Burada sadece gelen Datanın formatlanması ve formattedData'nın table'a aktarılması gerçekleşir.
   async function formatData(data) {
     console.log(data)
-    const formattedData = await formatDevice(
+    const formattedData = await formatDeviceMock(
       data,
       handleUpdateTableData,
       handleDeleteTableData,
@@ -71,10 +73,7 @@ const DeviceScreen = () => {
     {isLoadingTable ? (
       <Loading message="Tablo Yükleniyor, lütfen bekleyiniz..." />
     ) : (
-      <>
-        <Text style={styles.title}>Device Screen</Text>
-        <TableComponent data={tableData} />
-      </>
+        <ResponsiveTableCard data={tableData} />
     )}
   </ScreenWrapper>
   )

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Dimensions, ScrollView, StyleSheet } from 'react-native';
 import EditableCellInput from './childs/editableCellInput';
 import { cellTrimmer } from '../cellTrimmer';
-import globalStyles from '../../../styles/globalStyles';
-import ButtonOriginal from '../../../../button/buttonOriginal';
-import { color } from '../../../../../styles/color';
+import globalStyles from '../../../../styles/globalStyles';
+import ButtonOriginal from '../../../button/buttonOriginal';
+import { color } from '../../../../styles/color';
 
 const width = Dimensions.get('window').width;
 
@@ -12,15 +12,15 @@ const EditableCell = ({ data, horizontal, item, keyName, updateFunction }) => {
   const [edit, setEdit] = useState(false);
   const initialValue = item
   const [value, setValue] = useState(initialValue);
-  const [textValue, setTextValue] = useState(''); // Trimmed Value
+  const [textValue, setTextValue] = useState(initialValue); // Trimmed Value
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
   const maxLength = 30;
 
   const generalStyles = globalStyles(width);
 
-  useEffect(() => {
-    cellTrimmer({ maxLength, value, setTextValue });
-  }, [value]);
+  // useEffect(() => {
+  //   cellTrimmer({ maxLength, value, setTextValue });
+  // }, [value]);
 
   const handleUpdateValue = async () => {
     setIsLoadingUpdate(true);
@@ -70,22 +70,12 @@ const EditableCell = ({ data, horizontal, item, keyName, updateFunction }) => {
       />
     </>
     ) : (
-    <ScrollView 
-      horizontal={horizontal} 
-      contentContainerStyle={generalStyles.cellWidth}
-    >
       <ButtonOriginal
-        buttonStyle={{ flex: 1, alignSelf: 'center' }}
+        buttonStyle={{ flex: 1 }}
         onPress={() => setEdit(true)}
-      >
-        <View style={generalStyles.cellView}>
-          <Text style={generalStyles.cellComponent}>
-            {textValue}
-          </Text>
-        </View>
-
-      </ButtonOriginal>
-    </ScrollView>
+        title={textValue}
+        textStyle={generalStyles.cellComponent}
+      />
     )
     }
   </View>

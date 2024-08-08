@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet, Dimensions, Alert } from 'react-native';
-import { color } from '../../../styles/color';
-import globalStyles from '../../../styles/globalStyles';
-import ButtonOriginal from '../../button/buttonOriginal';
-import Loading from '../../loading/loading';
+import { color } from '../../../../styles/color';
+import globalStyles from '../../../../styles/globalStyles';
+import ButtonOriginal from '../../../button/buttonOriginal';
+import Loading from '../../../loading/loading';
 
 const width = Dimensions.get("window").width;
 
@@ -32,9 +32,9 @@ const CellComponent = (props) => {
   };
 
   return (
-    <View style={[styles.container, cellClasses]}>
+    <View style={[styles.container, cellClasses, { width: props.width }]}>
       {/* ButtonOriginal component handling delete action */}
-      <ButtonOriginal onPress={handleDeleteFunction}>
+      <ButtonOriginal buttonStyle={{ flex: 1, justifyContent: "center", padding: 0 }} onPress={handleDeleteFunction}>
         {/* Conditionally render Loading component or Text component */}
         {props.deleteIndex === props.rowIndex ? (
           <Loading
@@ -44,7 +44,7 @@ const CellComponent = (props) => {
             textStyle={{ fontSize: width >= 768 ? 15 : 12 }}
           />
         ) : (
-          <Text style={styles.buttonTextFilter}>{props.item} </Text>
+          <Text style={{ width: props.width }}>{props.item} </Text>
         )}
       </ButtonOriginal>
     </View>
@@ -53,24 +53,15 @@ const CellComponent = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 10,
+    height: 100,
     margin: 0,
-    padding: 0,
-    height: 50,
-    justifyContent: "center",
   },
   even: {
     backgroundColor: color.white,
   },
   odd: {
     backgroundColor: color.odd,
-  },
-  buttonTextFilter: {
-    fontSize: width >= 500 ? 15 : 12,
-    fontWeight: "550",
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 5,
   },
 });
 

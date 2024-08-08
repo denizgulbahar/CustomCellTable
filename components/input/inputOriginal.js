@@ -18,24 +18,22 @@ const InputOriginal = ({
 }) => {
 
   return (
-      <View style={[styles.col, viewStyle]}>
-        {label ? (
-          // If Input has label prop, display it in Text Component
-          <Text style={[styles.label, labelStyle]}>{label}</Text>
-        ) : false
-        }
-        <TextInput
-          style={[styles.textInput, inputStyle]}
-          placeholder={placeholder}
-          placeholderTextColor={color.grey}
-          onChangeText={onChangeText}
-          keyboardType={keyboardType}
-          value={value}
-          multiline={multiline}
-          numberOfLines={numberOfLines}
-          secureTextEntry={secureTextEntry}
-        />
-      </View>
+    <View style={[styles.col, viewStyle]}>
+      {label && ( 
+        <Text style={[styles.label, labelStyle]}>{label}</Text>
+      )}
+      <TextInput
+        style={[styles.textInput, inputStyle]}
+        placeholder={placeholder}
+        placeholderTextColor={color.grey}
+        onChangeText={onChangeText}
+        keyboardType={keyboardType}
+        value={value}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
+        secureTextEntry={secureTextEntry}
+      />
+    </View>
   );
 };
 const styles = StyleSheet.create({

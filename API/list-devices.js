@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import constants from "../../resources/constants";
+import constants from "../resources/constants";
 async function devicePermissionLevels(data) {
     const response = await fetch(`${constants.API_URL_USER}/get-all-devices`, {
         method: 'POST',

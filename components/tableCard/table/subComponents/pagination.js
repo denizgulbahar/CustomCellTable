@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { color } from '../../../styles/color';
-import ButtonOriginal from '../../button/buttonOriginal';
+import { color } from '../../../../styles/color';
+import ButtonOriginal from '../../../button/buttonOriginal';
 
 const Pagination = ({ data, setData }) => {
 
