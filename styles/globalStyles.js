@@ -17,7 +17,8 @@ const globalStyles = (width) => {
         getCellWidth,
         cellOutView: {
             flex: 1,
-            justifyContent: "center",
+            justifyContent: 'center',
+            alignItems: "center",
         },
         mediumShadowStyle: {
             shadowColor: 'rgba(0, 0, 0, 0.25)',
@@ -26,15 +27,11 @@ const globalStyles = (width) => {
             shadowRadius: 3,
             elevation: 3, // Android için shadow
         },
-        cellView: {
-            flex: 1,
-            width: "auto",
-            marginVertical: "auto",
-        },
         cellComponent: {
             textAlign: "center",
             fontSize: width > 500 ? 15 : 12,
             color: color.black,
+            padding: 0,
         },
         editableCellButton: {
             flex: 1,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, ScrollView, Dimensions } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 import globalStyles from "../../../styles/globalStyles";
 import { cellTrimmer } from "./cellTrimmer";
 
@@ -17,13 +17,9 @@ const TextCell = ({ item }) => {
 
   return (
     <View style={generalStyles.cellOutView}>
-      <ScrollView horizontal contentContainerStyle={generalStyles.cellWidth}>
-        <View style={generalStyles.cellView}>
-          <Text style={generalStyles.cellComponent}>
-            {textValue}
-          </Text>
-        </View>
-      </ScrollView>
+      <Text style={generalStyles.cellComponent}>
+        {textValue}
+      </Text>
     </View>
   );
 }

@@ -1,8 +1,10 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { color } from "../../../../../styles/color";
 import InputOriginal from "../../../../input/inputOriginal";
 import Loading from "../../../../loading/loading";
+
+const width = Dimensions.get('window').width;
 
 const EditableCellInput = ({ onChange, value, isLoading }) => {
   

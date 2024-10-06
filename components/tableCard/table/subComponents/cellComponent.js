@@ -32,9 +32,9 @@ const CellComponent = (props) => {
   };
 
   return (
-    <View style={[styles.container, cellClasses, { width: props.width }]}>
+    <View style={[styles.container, { width: props.width }]}>
       {/* ButtonOriginal component handling delete action */}
-      <ButtonOriginal buttonStyle={{ flex: 1, justifyContent: "center", padding: 0 }} onPress={handleDeleteFunction}>
+      <ButtonOriginal buttonStyle={styles.cellButton} onPress={handleDeleteFunction}>
         {/* Conditionally render Loading component or Text component */}
         {props.deleteIndex === props.rowIndex ? (
           <Loading
@@ -44,7 +44,7 @@ const CellComponent = (props) => {
             textStyle={{ fontSize: width >= 768 ? 15 : 12 }}
           />
         ) : (
-          <Text style={{ width: props.width }}>{props.item} </Text>
+          <Text style={{ width: props.width, flex: 1 }}>{props.item}</Text>
         )}
       </ButtonOriginal>
     </View>
@@ -53,9 +53,13 @@ const CellComponent = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    height: 100,
+    height: 130,
     margin: 0,
+  },
+  cellButton: {
+    flex: 1, 
+    backgroundColor: "transparent",
+    borderRadius: 0,
   },
   even: {
     backgroundColor: color.white,

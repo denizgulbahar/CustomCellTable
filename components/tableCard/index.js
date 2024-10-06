@@ -6,9 +6,9 @@ import { handleTransformCard } from './card/handleTransformCard'
 import { handleTransformTable } from './table/handleTransformTable'
 import globalStyles from '../../styles/globalStyles'
 import Loading from '../loading/loading'
-import ButtonOriginal from '../button/buttonOriginal'
 import { calculateMaxWidths } from '../../utilities/tableCard/calculateMaxWidths'
 import { dataSource } from '../../data/dataSource'
+import CellComponent from './table/subComponents/cellComponent'
 
 const { width } = Dimensions.get('window');
 
@@ -65,18 +65,21 @@ const ResponsiveTableCard = (props) => {
   const renderItemSmall = ({ item, index }) => {
     const keys = Object.keys(item);
     const values = Object.values(item);
-
+    console.log("value", values[0])
     return (
       <View style={styles.renderItemPhone}>
         {keys.map((key, innerIndex) => (
           index === selectedIndex ? (
             <Loading key={innerIndex} message="Veri siliniyor..." />
           ) : (
-            <View key={innerIndex} style={{ flexDirection: "row" }}>
+            <View key={innerIndex} style={{ flex:1, flexDirection: "row", padding: 8, alignItems:"center" }}>
               <Text style={styles.textKey}>{key}:</Text>
-              <ButtonOriginal 
-                onPress={() => handleDeleteFunction(values[innerIndex].props, innerIndex)} 
-                title={values[innerIndex]} 
+              <CellComponent
+                width={width/2}
+                item={values[innerIndex]} 
+                setDeleteIndex={setDeleteIndex}
+                rowIndex={1} 
+                deleteIndex={2}
               />
             </View>
           )
@@ -100,7 +103,7 @@ const ResponsiveTableCard = (props) => {
   const renderSmallScreen = () => (
     <View style={styles.cardViewStyle}>
       <FlatList
-        style={{ flexDirection: "row" }}
+        style={{ flex: 1, flexDirection: "row" }}
         data={tableAllData}
         renderItem={renderItemSmall}
       />
@@ -122,7 +125,6 @@ const styles = StyleSheet.create({
   renderItemPhone: {
     borderWidth: 0.5,
     flex: 1,
-    ...globalStyles(width).mediumShadowStyle,
     borderRadius: 30,
     marginVertical: 6,
     paddingHorizontal: 10 

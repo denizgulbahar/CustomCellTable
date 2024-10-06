@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, Dimensions, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Dimensions, StyleSheet } from 'react-native';
 import EditableCellInput from './childs/editableCellInput';
 import { cellTrimmer } from '../cellTrimmer';
 import globalStyles from '../../../../styles/globalStyles';
@@ -42,6 +42,13 @@ const EditableCell = ({ data, horizontal, item, keyName, updateFunction }) => {
     setEdit(false);
   };
 
+  const commonStyles = {
+    width: 50,
+    height: width >= 500 ? 50 : 30,
+    borderRadius: width >= 500 ? "auto" : 8,
+    borderWidth: 1,
+    padding: 3
+  }
   return (
   <View style={generalStyles.cellOutView}>
     {/* 
@@ -50,28 +57,28 @@ const EditableCell = ({ data, horizontal, item, keyName, updateFunction }) => {
     - View mode shows a scrollable view with a single text component inside a button.
     */}
     {edit ? (
-    <>
+    <View style={{ flex: 1 }} pointerEvents="box-none">
       <ButtonOriginal 
         title="Kaydet" 
         onPress={handleUpdateValue} 
-        buttonStyle= {styles.saveButton}
+        buttonStyle= {[styles.saveButton, commonStyles]}
+        textStyle={{ fontSize: width >= 500 ? 16 : 12 }}
       />
-      <ScrollView contentContainerStyle={generalStyles.cellInputWidth}>
-        <EditableCellInput 
-          value={value} 
-          onChange={(v) => setValue(v)} 
-          isLoading={isLoadingUpdate} 
-        />
-      </ScrollView>
+      <EditableCellInput 
+        value={value} 
+        onChange={(v) => setValue(v)} 
+        isLoading={isLoadingUpdate} 
+      />
       <ButtonOriginal 
         title="Vazgeç" 
         onPress={cancelEdit} 
-        buttonStyle= {styles.cancelButton}
+        buttonStyle= {[styles.cancelButton, commonStyles]}
+        textStyle={{ fontSize: width >= 500 ? 16 : 12 }}
       />
-    </>
+    </View>
     ) : (
       <ButtonOriginal
-        buttonStyle={{ flex: 1 }}
+        buttonStyle={{ flex: 1, backgroundColor: "transparent" }}
         onPress={() => setEdit(true)}
         title={textValue}
         textStyle={generalStyles.cellComponent}
@@ -86,16 +93,10 @@ const styles = StyleSheet.create({
   saveButton:{
     backgroundColor: color.green,
     alignSelf: 'flex-end',
-    width: 50,
-    borderWidth: 1,
-    padding: 3
   },
   cancelButton: {
     backgroundColor: color.red,
     alignSelf: 'flex-start',
-    width: 50,
-    borderWidth: 1,
-    padding: 3
   }
 });
 export default EditableCell;

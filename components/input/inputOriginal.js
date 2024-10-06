@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
   label: {
     margin: 5,
     textAlign: "left",
-    fontSize: width > 500 ? 22 : 18,
+    fontSize: width > 500 ? 16 : 12,
   },
   textInput: {
     outlineStyle: 'none',
     textAlign: "left",
-    fontSize: width > 500 ? 22 : 18,
+    fontSize: width > 500 ? 16 : 12,
     padding: 15,
     borderWidth: 1,
     borderRadius: 10,
