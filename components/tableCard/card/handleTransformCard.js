@@ -9,6 +9,6 @@ export function handleTransformCard(tableData) {
       });
       return obj;
     })
-    console.log(transformedData)
+    // console.log(transformedData)
     return transformedData
   }

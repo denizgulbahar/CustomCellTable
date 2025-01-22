@@ -33,11 +33,6 @@ const globalStyles = (width) => {
             color: color.black,
             padding: 0,
         },
-        editableCellButton: {
-            flex: 1,
-            justifyContent: 'center',
-            alignSelf: "center",
-        },
         cellWidth: {
             width: cellWidthValue,
             alignItems: "flex-start",

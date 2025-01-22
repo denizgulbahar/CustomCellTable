@@ -9,6 +9,7 @@ import Loading from '../loading/loading'
 import { calculateMaxWidths } from '../../utilities/tableCard/calculateMaxWidths'
 import { dataSource } from '../../data/dataSource'
 import CellComponent from './table/subComponents/cellComponent'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const { width } = Dimensions.get('window');
 
@@ -65,14 +66,14 @@ const ResponsiveTableCard = (props) => {
   const renderItemSmall = ({ item, index }) => {
     const keys = Object.keys(item);
     const values = Object.values(item);
-    console.log("value", values[0])
+    // console.log("value", values[0])
     return (
       <View style={styles.renderItemPhone}>
         {keys.map((key, innerIndex) => (
           index === selectedIndex ? (
             <Loading key={innerIndex} message="Veri siliniyor..." />
           ) : (
-            <View key={innerIndex} style={{ flex:1, flexDirection: "row", padding: 8, alignItems:"center" }}>
+            <View key={innerIndex} style={{ flex: 1, flexDirection: "row", alignItems:"center" }}>
               <Text style={styles.textKey}>{key}:</Text>
               <CellComponent
                 width={width/2}
@@ -90,20 +91,21 @@ const ResponsiveTableCard = (props) => {
 
   // Render for large screens - Tablets && PCs
   const renderLargeScreen = () => (
-    <FlatList
-      data={tableAllData}
-      renderItem={renderItemLarge}
-      contentContainerStyle={styles.tableViewStyle}
-      ListHeaderComponent={<TableHeaderComponent data={tableData} />}
-      ListFooterComponent={isLoadingTable && <Loading message="Tablo Yükleniyor, lütfen bekleyin..." />}
-    />
+    <ScrollView horizontal>
+      <FlatList
+        scrollEnabled={false}
+        data={tableAllData}
+        renderItem={renderItemLarge}
+        ListHeaderComponent={<TableHeaderComponent data={tableData} />}
+      />
+    </ScrollView>
   );
 
   // Render for small screens - Phones
   const renderSmallScreen = () => (
     <View style={styles.cardViewStyle}>
       <FlatList
-        style={{ flex: 1, flexDirection: "row" }}
+        scrollEnabled={false}
         data={tableAllData}
         renderItem={renderItemSmall}
       />
@@ -123,8 +125,8 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   renderItemPhone: {
-    borderWidth: 0.5,
     flex: 1,
+    borderWidth: 0.5,
     borderRadius: 30,
     marginVertical: 6,
     paddingHorizontal: 10 
@@ -132,15 +134,8 @@ const styles = StyleSheet.create({
   cardViewStyle: { 
     flex: 1, 
     flexDirection: "row", 
-    paddingVertical: 10 
+    justifyContent: "center",
+    paddingVertical: 10,
   },
-  tableViewStyle: {
-    margin: 0,
-    flexGrow: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    ...globalStyles(width).mediumShadowStyle,
-  }
 })
 export default ResponsiveTableCard;

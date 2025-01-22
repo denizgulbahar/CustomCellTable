@@ -53,12 +53,13 @@ const CellComponent = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 130,
+    height: 102,
     margin: 0,
   },
   cellButton: {
     flex: 1, 
     backgroundColor: "transparent",
+    padding:0,
     borderRadius: 0,
   },
   even: {

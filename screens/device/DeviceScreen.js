@@ -53,8 +53,8 @@ const DeviceScreen = () => {
     // Handle list ve filterOperationsda debounceSeachde çalıştırılır.
     // Burada sadece gelen Datanın formatlanması ve formattedData'nın table'a aktarılması gerçekleşir.
   async function formatData(data) {
-    console.log(data)
-    const formattedData = await formatDeviceMock(
+    // console.log(data)
+    const formattedData = await formatDevice(
       data,
       handleUpdateTableData,
       handleDeleteTableData,

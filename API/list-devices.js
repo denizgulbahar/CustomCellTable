@@ -17,7 +17,7 @@ const listDevicePermissionLevels  = async () => {
         // console.log("Before list call")
         const data = await devicePermissionLevels(tokenRaw);
         const tableData = data.result
-        console.log(tableData)
+        // console.log(tableData)
         return  tableData
     } catch (error) {
         console.log('error', error);
