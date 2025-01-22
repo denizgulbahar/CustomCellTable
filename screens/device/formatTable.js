@@ -7,7 +7,7 @@ import ModalCell from "../../components/tableCard/cellComponents/modalCell";
 import { IconButton } from "react-native-paper";
 import TextCell from "../../components/tableCard/cellComponents/textCell";
 
-async function formatDevice(inputData, updateFunction, deleteFunction) {
+async function formatTable({inputData, deleteFunction }) {
     // İşlem sırası düzeltilince yapılacak.
     const data = await inputData
     const outputData =  await inputDataWithButton(data)
@@ -53,4 +53,4 @@ async function formatDevice(inputData, updateFunction, deleteFunction) {
     
     return outputData;
   }
-  export default formatDevice;
+  export default formatTable;
