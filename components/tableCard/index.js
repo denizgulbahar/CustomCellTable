@@ -4,7 +4,6 @@ import RowFlatlist from './table/subComponents/rowFlatlist'
 import { TableHeaderComponent } from './table/subComponents/TableHeaderComponent'
 import { handleTransformCard } from './card/handleTransformCard'
 import { handleTransformTable } from './table/handleTransformTable'
-import globalStyles from '../../styles/globalStyles'
 import Loading from '../loading/loading'
 import { calculateMaxWidths } from '../../utilities/tableCard/calculateMaxWidths'
 import { dataSource } from '../../data/dataSource'
@@ -13,12 +12,11 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 const { width } = Dimensions.get('window');
 
-const ResponsiveTableCard = (props) => {
-  const { data: tableData, isLoadingTable } = props;
+const ResponsiveTableCard = ({ tableData }) => {
   const [deleteIndex, setDeleteIndex] = useState(-1);
   const [selectedIndex, setSelectedIndex] = useState(-2);
   const [tableAllData, setTableAllData] = useState([]);
-  
+    // console.log("data",tableData)
   // Calculate Max Column Width Properties
   // Burada, datasource çiftkatlı array yapılıp fonksiyonda props.array yerine geçecek.
   const [columnWidths, setColumnWidths] = useState([]);
@@ -73,7 +71,7 @@ const ResponsiveTableCard = (props) => {
           index === selectedIndex ? (
             <Loading key={innerIndex} message="Veri siliniyor..." />
           ) : (
-            <View key={innerIndex} style={{ flex: 1, flexDirection: "row", alignItems:"center" }}>
+            <View key={innerIndex} style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.textKey}>{key}:</Text>
               <CellComponent
                 width={width/2}

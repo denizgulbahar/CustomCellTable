@@ -1,14 +1,10 @@
-import { FlatList, View, ScrollView, Dimensions } from "react-native";
-import globalStyles from "../../../styles/globalStyles";
+import { FlatList, View, Dimensions, StyleSheet } from "react-native";
 import CustomModal from "../../../components/modal/customModal";
 
-const { width } = Dimensions.get("window")
-
 const ModalCell = ({ item }) => {
-  const generalStyles = globalStyles(width)
   // ModalData, gelen dataya göre dönüştürülecek.
   return(
-    <View style={generalStyles.cellOutView}>
+    <View style={styles.cellOutView}>
       <CustomModal>
         <FlatList
           data={modalData}
@@ -19,4 +15,11 @@ const ModalCell = ({ item }) => {
     </View>
   )
 }
+const styles = StyleSheet.create({
+  cellOutView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: "center",
+  },
+})
   export default ModalCell;

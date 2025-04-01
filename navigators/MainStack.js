@@ -17,7 +17,7 @@ export default function MainStack() {
                     name="devices"
                     component={DeviceScreen}
                 />
-            </Stack.Navigator >
+            </Stack.Navigator>
         </>
     );
 }

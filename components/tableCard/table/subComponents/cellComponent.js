@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Dimensions, Alert } from 'react-native';
 import { color } from '../../../../styles/color';
-import globalStyles from '../../../../styles/globalStyles';
 import ButtonOriginal from '../../../button/buttonOriginal';
 import Loading from '../../../loading/loading';
 
@@ -38,7 +37,6 @@ const CellComponent = (props) => {
         {/* Conditionally render Loading component or Text component */}
         {props.deleteIndex === props.rowIndex ? (
           <Loading
-            containerStyle={globalStyles(width).getCellWidth + 10}
             message="Veri siliniyor..."
             loadingSize={width >= 768 ? 40 : 20}
             textStyle={{ fontSize: width >= 768 ? 15 : 12 }}

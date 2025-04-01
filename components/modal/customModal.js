@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { color } from '../../styles/color';
-import ButtonOriginal from '../buttons/buttonOriginal';
+import ButtonOriginal from '../button/buttonOriginal'
 
 const { width } = Dimensions.get("window")
 

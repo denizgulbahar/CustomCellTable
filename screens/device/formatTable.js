@@ -7,8 +7,7 @@ import ModalCell from "../../components/tableCard/cellComponents/modalCell";
 import { IconButton } from "react-native-paper";
 import TextCell from "../../components/tableCard/cellComponents/textCell";
 
-async function formatTable({inputData, deleteFunction }) {
-    // İşlem sırası düzeltilince yapılacak.
+async function formatTable(inputData, deleteFunction) {
     const data = await inputData
     const outputData =  await inputDataWithButton(data)
     // First loop - Row Data
@@ -45,7 +44,7 @@ async function formatTable({inputData, deleteFunction }) {
         // } 
         else {
           const previousCells = outputData.data[key].cells;
-          const textCell = <TextCell item={item} />
+          const textCell = <TextCell item={transformedItem} />
           outputData.data[key].cells = [...previousCells, textCell];
         }
       }

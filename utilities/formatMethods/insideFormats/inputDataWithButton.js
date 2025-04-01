@@ -1,5 +1,5 @@
 export const inputDataWithButton = async (inputData) => {
-    const data = await inputData 
+    const data = await inputData
     if (data.length !== 0) {
       const headings = Object.keys(data[0]);
       const allHeadings = [...headings, "Sil"];

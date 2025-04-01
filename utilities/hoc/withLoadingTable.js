@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Loading from '../../components/loading/loading';
 
 export const withLoadingTable = (TableComponent) => {
-    return (props) => {
+  return ({ isLoadingTable, data, ...props }) => {
+    console.log("tableData:",tab)
+    return (
+      <>
+        <TableComponent {...props} data={data} isLoadingTable={isLoadingTable} />
+        {isLoadingTable && <Loading message="Tablo Yükleniyor, lütfen bekleyiniz..." />}
+      </>
+    );
+  };
+};
 
-        const [isLoadingTable, setIsLoadingTable] = useState(false);
-        const updateLoadingTable = (state) => {
-            setIsLoadingTable(state)
-        }
-        return (isLoadingTable ? (
-            <Loading message="Tablo Yükleniyor, lütfen bekleyiniz..." />
-            ) : (
-            <TableComponent {...props} updateLoadingTable={updateLoadingTable} />
-            )
-        )
-    }
-}
