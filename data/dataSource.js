@@ -5,7 +5,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.01.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 2',
@@ -13,7 +13,7 @@ export const dataSource = [
     deviceType: 'Tam Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.02.2022',
-    status: false,
+    status: "false",
   },
   {
     deviceName: 'Eliyte demo 3',
@@ -21,7 +21,7 @@ export const dataSource = [
     deviceType: 'Tam Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.03.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 4',
@@ -29,7 +29,7 @@ export const dataSource = [
     deviceType: 'saddsa Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.05.2022',
-    status: false,
+    status: "false",
   },
   {
     deviceName: 'Eliyte demo 5',
@@ -37,7 +37,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2021',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 6',
@@ -45,7 +45,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '20.09.2022',
-    status: false,
+    status: "false",
   },
   {
     deviceName: 'Eliyte demo 7',
@@ -53,7 +53,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 8',
@@ -61,7 +61,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 9',
@@ -69,7 +69,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.10.2020',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 10',
@@ -77,7 +77,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 11',
@@ -85,7 +85,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: false,
+    status: "false",
   },
   {
     deviceName: 'Eliyte demo 12',
@@ -93,7 +93,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2020',
-    status: false,
+    status: "false",
   },
   {
     deviceName: 'Eliyte demo 13',
@@ -101,7 +101,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2018',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 14',
@@ -109,7 +109,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 15',
@@ -117,7 +117,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 16',
@@ -125,7 +125,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2023',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 17',
@@ -133,7 +133,7 @@ export const dataSource = [
     deviceType: 'Tam Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2023',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 18',
@@ -141,7 +141,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 19',
@@ -149,7 +149,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
   {
     deviceName: 'Eliyte demo 20',
@@ -157,7 +157,7 @@ export const dataSource = [
     deviceType: 'Yarı Akıllı Elektrik Sayacı',
     location: 'Misket Sk. No:22/B Beştepe Yenimahalle Ankara',
     creationDate: '26.09.2022',
-    status: true,
+    status: "true",
   },
 ];
 

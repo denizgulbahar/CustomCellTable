@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: "center",
+    minWidth: 60,
   },
   cellComponent: {
     textAlign: "center",
