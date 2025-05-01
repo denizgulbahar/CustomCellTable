@@ -1,11 +1,9 @@
 import {inputDataWithButton} from "../../utilities/formatMethods/insideFormats/inputDataWithButton"
 import { objectTransformer } from "../../utilities/formatMethods/insideFormats/objectTransformer";
-import { color } from "../../styles/color";
-import { Ionicons } from "@expo/vector-icons";
 import SwitchOriginal from "../../components/switch/switchOriginal";
 import ModalCell from "../../components/tableCard/cellComponents/modalCell";
-import { IconButton } from "react-native-paper";
 import TextCell from "../../components/tableCard/cellComponents/textCell";
+import { DeleteButton } from "../../components/tableCard/cellComponents/deleteButton";
 
 async function formatTable(inputData, deleteFunction) {
     const data = await inputData
@@ -17,14 +15,8 @@ async function formatTable(inputData, deleteFunction) {
         let transformedItem = objectTransformer(item[key])
         if (key === "Sil") {
           let previousButtonCells = outputData.data[key]["cells"];
-          const closeButton = (
-             <IconButton
-              icon={() => <Ionicons name='close-circle' size={60} color={color.red} />}
-              style= {{ width: 100, height: 100 }}
-              onPress={() => deleteFunction(item)}
-            />
-          )
-          outputData.data[key]["cells"] = [...previousButtonCells, closeButton];
+          const deleteButton = <DeleteButton onDelete={() => deleteFunction(item)}/>
+          outputData.data[key]["cells"] = [...previousButtonCells, deleteButton];
         } 
         // else if (key === "status") {
         //   const previousCells = outputData.data[key].cells;
