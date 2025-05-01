@@ -8,7 +8,7 @@ import { DeleteButton } from "../../components/tableCard/cellComponents/deleteBu
 async function formatTable(inputData, deleteFunction) {
   const data = await inputData;
   const outputData = await inputDataWithButton(data);
-  const headers = Object.keys(data[0] || {});
+  const headers = outputData.headings || []
 
   for (let key of headers) {
     outputData.data[key]["cells"] = [];

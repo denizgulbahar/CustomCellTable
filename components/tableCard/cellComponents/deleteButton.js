@@ -7,7 +7,7 @@ import { color } from "../../../styles/color";
 const screenWidth = Dimensions.get("window").width;
 const isLargeScreen = screenWidth > 500;
 const BUTTON_SIZE = isLargeScreen ? 100 : 75;
-const ICON_SIZE = isLargeScreen ? 60 : 45;
+const ICON_SIZE = isLargeScreen ? 50 : 40;
 
 const styles = StyleSheet.create({
   button: {

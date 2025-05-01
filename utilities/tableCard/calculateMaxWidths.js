@@ -1,4 +1,3 @@
-import { dataSource } from "../../data/dataSource";
 
 export const measureText = (text, fontSize = 14) => {
     return text.length * fontSize * 0.6; // This is a rough estimation of character width.
@@ -10,9 +9,17 @@ export const measureText = (text, fontSize = 14) => {
 export const calculateMaxWidths = (data) => {
   if (data.length === 0) return [];
 
-  const numColumns = Object.values(data[0]).length;
+  const headers = Object.keys(data[0]);
+  const numColumns = headers.length;
   const widths = Array(numColumns).fill(0);
 
+  // First Check Header Widths
+  headers.forEach((header, index) => {
+    const headerWidth = measureText(header);
+    widths[index] = headerWidth;
+  });
+
+  // Check All Widths
   data.forEach(row => {
     Object.values(row).forEach((cell, index) => {
       const cellWidth = measureText(cell);

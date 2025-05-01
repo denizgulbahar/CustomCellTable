@@ -43,7 +43,8 @@ const CellComponent = (props) => {
           />
         ) : (
           <Text style={{ width: props.width, flex: 1 }}>{props.item}</Text>
-        )}
+        )
+        }
       </ButtonOriginal>
     </View>
   );
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   cellButton: {
     flex: 1, 
     backgroundColor: "transparent",
-    padding:0,
+    padding: 0,
     borderRadius: 0,
   },
   even: {

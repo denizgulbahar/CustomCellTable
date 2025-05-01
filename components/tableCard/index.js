@@ -26,7 +26,6 @@ const ResponsiveTableCard = ({ tableData }) => {
   // Data Transformation Depend on Screen Size
   useEffect(() => {
     const transformedData = width >= 500 ? handleTransformTable(tableData) : handleTransformCard(tableData);
-    console.log("denizg:", transformedData)
     setTableAllData(transformedData);
   }, [tableData]);
 

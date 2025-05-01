@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   cellComponent: {
     textAlign: "center",
     fontSize: width > 500 ? 15 : 12,
-    
     color: color.black,
     padding: 0,
 },
