@@ -1,7 +1,6 @@
 import { View, Text, FlatList, Dimensions, StyleSheet, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import RowFlatlist from './table/subComponents/rowFlatlist'
-import { TableHeaderComponent } from './table/subComponents/TableHeaderComponent'
 import { handleTransformCard } from './card/handleTransformCard'
 import { handleTransformTable } from './table/handleTransformTable'
 import Loading from '../loading/loading'
@@ -18,7 +17,6 @@ const ResponsiveTableCard = ({ tableData }) => {
   const [tableAllData, setTableAllData] = useState([]);
     // console.log("data",tableData)
   // Calculate Max Column Width Properties
-  // Burada, datasource çiftkatlı array yapılıp fonksiyonda props.array yerine geçecek.
   const [columnWidths, setColumnWidths] = useState([]);
   useEffect(() => {
     const widths = calculateMaxWidths(dataSource);
@@ -28,6 +26,7 @@ const ResponsiveTableCard = ({ tableData }) => {
   // Data Transformation Depend on Screen Size
   useEffect(() => {
     const transformedData = width >= 500 ? handleTransformTable(tableData) : handleTransformCard(tableData);
+    console.log("denizg:", transformedData)
     setTableAllData(transformedData);
   }, [tableData]);
 
@@ -94,7 +93,6 @@ const ResponsiveTableCard = ({ tableData }) => {
         scrollEnabled={false}
         data={tableAllData}
         renderItem={renderItemLarge}
-        ListHeaderComponent={<TableHeaderComponent data={tableData} />}
       />
     </ScrollView>
   );

@@ -13,7 +13,7 @@ const TableScreen = () => {
   const [isLoadingTable, setIsLoading] = useState(true);
   async function handleListTableData(data) {
     try {
-      const formattedData = await formatTable( data, handleDeleteTableData)                
+      const formattedData = await formatTable(data, handleDeleteTableData)                
       setTableData(formattedData)
     } catch (error) {
       console.error('Error handling table data:', error);

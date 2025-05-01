@@ -5,7 +5,7 @@ import { cellTrimmer } from "./cellTrimmer";
 
 
 const { width } = Dimensions.get('window');
-const TextCell = ({ item }) => {
+const TextCell = ({ item, isBold }) => {
   const [textValue, setTextValue] = useState(item);
 
   const maxLength = 40;
@@ -16,7 +16,7 @@ const TextCell = ({ item }) => {
 
   return (
     <View style={styles.cellOutView}>
-      <Text style={styles.cellComponent}>
+      <Text style={[styles.cellComponent, {fontWeight: isBold ? "600" : "400" }]}>
         {textValue}
       </Text>
     </View>
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   cellComponent: {
     textAlign: "center",
     fontSize: width > 500 ? 15 : 12,
+    
     color: color.black,
     padding: 0,
 },
